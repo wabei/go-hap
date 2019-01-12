@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2015 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package common
 
@@ -25,8 +25,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/wabei/go-wabei/common/hexutil"
-	"github.com/wabei/go-wabei/crypto/sha3"
+	"github.com/wabei/go-hap/common/hexutil"
+	"github.com/wabei/go-hap/crypto/sha3"
 )
 
 const (
@@ -136,7 +136,7 @@ func (h UnprefixedHash) MarshalText() ([]byte, error) {
 
 /////////// Address
 
-// Address represents the 20 byte address of an Wabei account.
+// Address represents the 20 byte address of an Hap account.
 type Address [AddressLength]byte
 
 func BytesToAddress(b []byte) Address {
@@ -148,7 +148,7 @@ func BigToAddress(b *big.Int) Address { return BytesToAddress(b.Bytes()) }
 func HexToAddress(s string) Address   { return BytesToAddress(FromHex(s)) }
 
 // IsHexAddress verifies whether a string can represent a valid hex-encoded
-// Wabei address or not.
+// Hap address or not.
 func IsHexAddress(s string) bool {
 	if hasHexPrefix(s) {
 		s = s[2:]
