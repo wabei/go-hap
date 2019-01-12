@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2017 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -21,16 +21,16 @@ import (
 	"errors"
 	"math"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/hexutil"
-	"github.com/wabei/go-wabei/consensus/wabash"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/params"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/hexutil"
+	"github.com/wabei/go-hap/consensus/wabash"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/params"
 )
 
-// cppWabeiGenesisSpec represents the genesis specification format used by the
-// C++ Wabei implementation.
-type cppWabeiGenesisSpec struct {
+// cppHapGenesisSpec represents the genesis specification format used by the
+// C++ Hap implementation.
+type cppHapGenesisSpec struct {
 	SealEngine string `json:"sealEngine"`
 	Params     struct {
 		AccountStartNonce       hexutil.Uint64 `json:"accountStartNonce"`
@@ -62,38 +62,38 @@ type cppWabeiGenesisSpec struct {
 		GasLimit   hexutil.Uint64 `json:"gasLimit"`
 	} `json:"genesis"`
 
-	Accounts map[common.Address]*cppWabeiGenesisSpecAccount `json:"accounts"`
+	Accounts map[common.Address]*cppHapGenesisSpecAccount `json:"accounts"`
 }
 
-// cppWabeiGenesisSpecAccount is the prefunded genesis account and/or precompiled
+// cppHapGenesisSpecAccount is the prefunded genesis account and/or precompiled
 // contract definition.
-type cppWabeiGenesisSpecAccount struct {
+type cppHapGenesisSpecAccount struct {
 	Balance     *hexutil.Big                   `json:"balance"`
 	Nonce       uint64                         `json:"nonce,omitempty"`
-	Precompiled *cppWabeiGenesisSpecBuiltin `json:"precompiled,omitempty"`
+	Precompiled *cppHapGenesisSpecBuiltin `json:"precompiled,omitempty"`
 }
 
-// cppWabeiGenesisSpecBuiltin is the precompiled contract definition.
-type cppWabeiGenesisSpecBuiltin struct {
+// cppHapGenesisSpecBuiltin is the precompiled contract definition.
+type cppHapGenesisSpecBuiltin struct {
 	Name          string                               `json:"name,omitempty"`
 	StartingBlock hexutil.Uint64                       `json:"startingBlock,omitempty"`
-	Linear        *cppWabeiGenesisSpecLinearPricing `json:"linear,omitempty"`
+	Linear        *cppHapGenesisSpecLinearPricing `json:"linear,omitempty"`
 }
 
-type cppWabeiGenesisSpecLinearPricing struct {
+type cppHapGenesisSpecLinearPricing struct {
 	Base uint64 `json:"base"`
 	Word uint64 `json:"word"`
 }
 
-// newCppWabeiGenesisSpec converts a go-wabei genesis block into a Parity specific
+// newCppHapGenesisSpec converts a go-hap genesis block into a Parity specific
 // chain specification format.
-func newCppWabeiGenesisSpec(network string, genesis *core.Genesis) (*cppWabeiGenesisSpec, error) {
-	// Only wabash is currently supported between go-wabei and cpp-wabei
+func newCppHapGenesisSpec(network string, genesis *core.Genesis) (*cppHapGenesisSpec, error) {
+	// Only wabash is currently supported between go-hap and cpp-wabei
 	if genesis.Config.Wabash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
 	// Reconstruct the chain spec in Parity's format
-	spec := &cppWabeiGenesisSpec{
+	spec := &cppHapGenesisSpec{
 		SealEngine: "Wabash",
 	}
 	spec.Params.AccountStartNonce = 0
@@ -126,36 +126,36 @@ func newCppWabeiGenesisSpec(network string, genesis *core.Genesis) (*cppWabeiGen
 	spec.Genesis.ExtraData = (hexutil.Bytes)(genesis.ExtraData)
 	spec.Genesis.GasLimit = (hexutil.Uint64)(genesis.GasLimit)
 
-	spec.Accounts = make(map[common.Address]*cppWabeiGenesisSpecAccount)
+	spec.Accounts = make(map[common.Address]*cppHapGenesisSpecAccount)
 	for address, account := range genesis.Alloc {
-		spec.Accounts[address] = &cppWabeiGenesisSpecAccount{
+		spec.Accounts[address] = &cppHapGenesisSpecAccount{
 			Balance: (*hexutil.Big)(account.Balance),
 			Nonce:   account.Nonce,
 		}
 	}
-	spec.Accounts[common.BytesToAddress([]byte{1})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-		Name: "ecrecover", Linear: &cppWabeiGenesisSpecLinearPricing{Base: 3000},
+	spec.Accounts[common.BytesToAddress([]byte{1})].Precompiled = &cppHapGenesisSpecBuiltin{
+		Name: "ecrecover", Linear: &cppHapGenesisSpecLinearPricing{Base: 3000},
 	}
-	spec.Accounts[common.BytesToAddress([]byte{2})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-		Name: "sha256", Linear: &cppWabeiGenesisSpecLinearPricing{Base: 60, Word: 12},
+	spec.Accounts[common.BytesToAddress([]byte{2})].Precompiled = &cppHapGenesisSpecBuiltin{
+		Name: "sha256", Linear: &cppHapGenesisSpecLinearPricing{Base: 60, Word: 12},
 	}
-	spec.Accounts[common.BytesToAddress([]byte{3})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-		Name: "ripemd160", Linear: &cppWabeiGenesisSpecLinearPricing{Base: 600, Word: 120},
+	spec.Accounts[common.BytesToAddress([]byte{3})].Precompiled = &cppHapGenesisSpecBuiltin{
+		Name: "ripemd160", Linear: &cppHapGenesisSpecLinearPricing{Base: 600, Word: 120},
 	}
-	spec.Accounts[common.BytesToAddress([]byte{4})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-		Name: "identity", Linear: &cppWabeiGenesisSpecLinearPricing{Base: 15, Word: 3},
+	spec.Accounts[common.BytesToAddress([]byte{4})].Precompiled = &cppHapGenesisSpecBuiltin{
+		Name: "identity", Linear: &cppHapGenesisSpecLinearPricing{Base: 15, Word: 3},
 	}
 	if genesis.Config.ByzantiumBlock != nil {
-		spec.Accounts[common.BytesToAddress([]byte{5})].Precompiled = &cppWabeiGenesisSpecBuiltin{
+		spec.Accounts[common.BytesToAddress([]byte{5})].Precompiled = &cppHapGenesisSpecBuiltin{
 			Name: "modexp", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()),
 		}
-		spec.Accounts[common.BytesToAddress([]byte{6})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-			Name: "alt_bn128_G1_add", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()), Linear: &cppWabeiGenesisSpecLinearPricing{Base: 500},
+		spec.Accounts[common.BytesToAddress([]byte{6})].Precompiled = &cppHapGenesisSpecBuiltin{
+			Name: "alt_bn128_G1_add", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()), Linear: &cppHapGenesisSpecLinearPricing{Base: 500},
 		}
-		spec.Accounts[common.BytesToAddress([]byte{7})].Precompiled = &cppWabeiGenesisSpecBuiltin{
-			Name: "alt_bn128_G1_mul", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()), Linear: &cppWabeiGenesisSpecLinearPricing{Base: 40000},
+		spec.Accounts[common.BytesToAddress([]byte{7})].Precompiled = &cppHapGenesisSpecBuiltin{
+			Name: "alt_bn128_G1_mul", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()), Linear: &cppHapGenesisSpecLinearPricing{Base: 40000},
 		}
-		spec.Accounts[common.BytesToAddress([]byte{8})].Precompiled = &cppWabeiGenesisSpecBuiltin{
+		spec.Accounts[common.BytesToAddress([]byte{8})].Precompiled = &cppHapGenesisSpecBuiltin{
 			Name: "alt_bn128_pairing_product", StartingBlock: (hexutil.Uint64)(genesis.Config.ByzantiumBlock.Uint64()),
 		}
 	}
@@ -201,7 +201,7 @@ type parityChainSpec struct {
 
 	Genesis struct {
 		Seal struct {
-			Wabei struct {
+			Hap struct {
 				Nonce   hexutil.Bytes `json:"nonce"`
 				MixHash hexutil.Bytes `json:"mixHash"`
 			} `json:"wabei"`
@@ -256,10 +256,10 @@ type parityChainSpecAltBnPairingPricing struct {
 	Pair uint64 `json:"pair"`
 }
 
-// newParityChainSpec converts a go-wabei genesis block into a Parity specific
+// newParityChainSpec converts a go-hap genesis block into a Parity specific
 // chain specification format.
 func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []string) (*parityChainSpec, error) {
-	// Only wabash is currently supported between go-wabei and Parity
+	// Only wabash is currently supported between go-hap and Parity
 	if genesis.Config.Wabash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
@@ -294,10 +294,10 @@ func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []strin
 	spec.Params.EIP214Transition = genesis.Config.ByzantiumBlock.Uint64()
 	spec.Params.EIP658Transition = genesis.Config.ByzantiumBlock.Uint64()
 
-	spec.Genesis.Seal.Wabei.Nonce = (hexutil.Bytes)(make([]byte, 8))
-	binary.LittleEndian.PutUint64(spec.Genesis.Seal.Wabei.Nonce[:], genesis.Nonce)
+	spec.Genesis.Seal.Hap.Nonce = (hexutil.Bytes)(make([]byte, 8))
+	binary.LittleEndian.PutUint64(spec.Genesis.Seal.Hap.Nonce[:], genesis.Nonce)
 
-	spec.Genesis.Seal.Wabei.MixHash = (hexutil.Bytes)(genesis.Mixhash[:])
+	spec.Genesis.Seal.Hap.MixHash = (hexutil.Bytes)(genesis.Mixhash[:])
 	spec.Genesis.Difficulty = (*hexutil.Big)(genesis.Difficulty)
 	spec.Genesis.Author = genesis.Coinbase
 	spec.Genesis.Timestamp = (hexutil.Uint64)(genesis.Timestamp)
@@ -341,9 +341,9 @@ func newParityChainSpec(network string, genesis *core.Genesis, bootnodes []strin
 	return spec, nil
 }
 
-// pyWabeiGenesisSpec represents the genesis specification format used by the
-// Python Wabei implementation.
-type pyWabeiGenesisSpec struct {
+// pyHapGenesisSpec represents the genesis specification format used by the
+// Python Hap implementation.
+type pyHapGenesisSpec struct {
 	Nonce      hexutil.Bytes     `json:"nonce"`
 	Timestamp  hexutil.Uint64    `json:"timestamp"`
 	ExtraData  hexutil.Bytes     `json:"extraData"`
@@ -355,14 +355,14 @@ type pyWabeiGenesisSpec struct {
 	ParentHash common.Hash       `json:"parentHash"`
 }
 
-// newPyWabeiGenesisSpec converts a go-wabei genesis block into a Parity specific
+// newPyHapGenesisSpec converts a go-hap genesis block into a Parity specific
 // chain specification format.
-func newPyWabeiGenesisSpec(network string, genesis *core.Genesis) (*pyWabeiGenesisSpec, error) {
-	// Only wabash is currently supported between go-wabei and pywabei
+func newPyHapGenesisSpec(network string, genesis *core.Genesis) (*pyHapGenesisSpec, error) {
+	// Only wabash is currently supported between go-hap and pywabei
 	if genesis.Config.Wabash == nil {
 		return nil, errors.New("unsupported consensus engine")
 	}
-	spec := &pyWabeiGenesisSpec{
+	spec := &pyHapGenesisSpec{
 		Timestamp:  (hexutil.Uint64)(genesis.Timestamp),
 		ExtraData:  genesis.ExtraData,
 		GasLimit:   (hexutil.Uint64)(genesis.GasLimit),

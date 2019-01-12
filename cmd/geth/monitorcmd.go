@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2015 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -25,9 +25,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wabei/go-wabei/cmd/utils"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/rpc"
+	"github.com/wabei/go-hap/cmd/utils"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/rpc"
 	"github.com/gizak/termui"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -73,7 +73,7 @@ func monitor(ctx *cli.Context) error {
 		client *rpc.Client
 		err    error
 	)
-	// Attach to an Wabei node over IPC or RPC
+	// Attach to an Hap node over IPC or RPC
 	endpoint := ctx.String(monitorCommandAttachFlag.Name)
 	if client, err = dialRPC(endpoint); err != nil {
 		utils.Fatalf("Unable to attach to geth node: %v", err)

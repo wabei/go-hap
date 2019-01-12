@@ -1,20 +1,20 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2015 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
-// Package utils contains internal helper functions for go-wabei commands.
+// Package utils contains internal helper functions for go-hap commands.
 package utils
 
 import (
@@ -28,34 +28,34 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/wabei/go-wabei/accounts"
-	"github.com/wabei/go-wabei/accounts/keystore"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/fdlimit"
-	"github.com/wabei/go-wabei/consensus"
-	"github.com/wabei/go-wabei/consensus/clique"
-	"github.com/wabei/go-wabei/consensus/wabash"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/vm"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/dashboard"
-	"github.com/wabei/go-wabei/eth"
-	"github.com/wabei/go-wabei/eth/downloader"
-	"github.com/wabei/go-wabei/eth/gasprice"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/ethstats"
-	"github.com/wabei/go-wabei/les"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/metrics"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/p2p"
-	"github.com/wabei/go-wabei/p2p/discover"
-	"github.com/wabei/go-wabei/p2p/discv5"
-	"github.com/wabei/go-wabei/p2p/nat"
-	"github.com/wabei/go-wabei/p2p/netutil"
-	"github.com/wabei/go-wabei/params"
-	whisper "github.com/wabei/go-wabei/whisper/whisperv6"
+	"github.com/wabei/go-hap/accounts"
+	"github.com/wabei/go-hap/accounts/keystore"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/fdlimit"
+	"github.com/wabei/go-hap/consensus"
+	"github.com/wabei/go-hap/consensus/clique"
+	"github.com/wabei/go-hap/consensus/wabash"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/vm"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/dashboard"
+	"github.com/wabei/go-hap/eth"
+	"github.com/wabei/go-hap/eth/downloader"
+	"github.com/wabei/go-hap/eth/gasprice"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/ethstats"
+	"github.com/wabei/go-hap/les"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/metrics"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/p2p"
+	"github.com/wabei/go-hap/p2p/discover"
+	"github.com/wabei/go-hap/p2p/discv5"
+	"github.com/wabei/go-hap/p2p/nat"
+	"github.com/wabei/go-hap/p2p/netutil"
+	"github.com/wabei/go-hap/params"
+	whisper "github.com/wabei/go-hap/whisper/whisperv6"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -1120,7 +1120,7 @@ func SetDashboardConfig(ctx *cli.Context, cfg *dashboard.Config) {
 	cfg.Refresh = ctx.GlobalDuration(DashboardRefreshFlag.Name)
 }
 
-// RegisterEthService adds an Wabei client to the stack.
+// RegisterEthService adds an Hap client to the stack.
 func RegisterEthService(stack *node.Node, cfg *eth.Config) {
 	var err error
 	if cfg.SyncMode == downloader.LightSync {
@@ -1138,7 +1138,7 @@ func RegisterEthService(stack *node.Node, cfg *eth.Config) {
 		})
 	}
 	if err != nil {
-		Fatalf("Failed to register the Wabei service: %v", err)
+		Fatalf("Failed to register the Hap service: %v", err)
 	}
 }
 
@@ -1158,20 +1158,20 @@ func RegisterShhService(stack *node.Node, cfg *whisper.Config) {
 	}
 }
 
-// RegisterEthStatsService configures the Wabei Stats daemon and adds it to
+// RegisterEthStatsService configures the Hap Stats daemon and adds it to
 // th egiven node.
 func RegisterEthStatsService(stack *node.Node, url string) {
 	if err := stack.Register(func(ctx *node.ServiceContext) (node.Service, error) {
 		// Retrieve both eth and les services
-		var ethServ *eth.Wabei
+		var ethServ *eth.Hap
 		ctx.Service(&ethServ)
 
-		var lesServ *les.LightWabei
+		var lesServ *les.LightHap
 		ctx.Service(&lesServ)
 
 		return ethstats.New(url, ethServ, lesServ)
 	}); err != nil {
-		Fatalf("Failed to register the Wabei Stats service: %v", err)
+		Fatalf("Failed to register the Hap Stats service: %v", err)
 	}
 }
 

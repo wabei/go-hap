@@ -1,7 +1,7 @@
 ethkey
 ======
 
-ethkey is a simple command-line tool for working with Wabei keyfiles.
+ethkey is a simple command-line tool for working with Hap keyfiles.
 
 
 # Usage

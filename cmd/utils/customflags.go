@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2015 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package utils
 
@@ -27,7 +27,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/wabei/go-wabei/common/math"
+	"github.com/wabei/go-hap/common/math"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -48,7 +48,7 @@ func (self *DirectoryString) Set(value string) error {
 }
 
 // Custom cli.Flag type which expand the received string to an absolute path.
-// e.g. ~/.wabei -> /home/username/.wabei
+// e.g. ~/.hap -> /home/username/.hap
 type DirectoryFlag struct {
 	Name  string
 	Value DirectoryString

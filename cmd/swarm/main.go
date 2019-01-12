@@ -1,18 +1,18 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2016 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -28,22 +28,22 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/wabei/go-wabei/accounts"
-	"github.com/wabei/go-wabei/accounts/keystore"
-	"github.com/wabei/go-wabei/cmd/utils"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/console"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/ethclient"
-	"github.com/wabei/go-wabei/internal/debug"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/p2p"
-	"github.com/wabei/go-wabei/p2p/discover"
-	"github.com/wabei/go-wabei/params"
-	"github.com/wabei/go-wabei/swarm"
-	bzzapi "github.com/wabei/go-wabei/swarm/api"
-	swarmmetrics "github.com/wabei/go-wabei/swarm/metrics"
+	"github.com/wabei/go-hap/accounts"
+	"github.com/wabei/go-hap/accounts/keystore"
+	"github.com/wabei/go-hap/cmd/utils"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/console"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/ethclient"
+	"github.com/wabei/go-hap/internal/debug"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/p2p"
+	"github.com/wabei/go-hap/p2p/discover"
+	"github.com/wabei/go-hap/params"
+	"github.com/wabei/go-hap/swarm"
+	bzzapi "github.com/wabei/go-hap/swarm/api"
+	swarmmetrics "github.com/wabei/go-hap/swarm/metrics"
 
 	"gopkg.in/urfave/cli.v1"
 )
@@ -98,7 +98,7 @@ var (
 	}
 	SwarmSwapAPIFlag = cli.StringFlag{
 		Name:   "swap-api",
-		Usage:  "URL of the Wabei API provider to use to settle SWAP payments",
+		Usage:  "URL of the Hap API provider to use to settle SWAP payments",
 		EnvVar: SWARM_ENV_SWAP_API,
 	}
 	SwarmSyncEnabledFlag = cli.BoolTFlag{
@@ -171,13 +171,13 @@ func init() {
 	utils.ListenPortFlag.Value = 30399
 }
 
-var app = utils.NewApp(gitCommit, "Wabei Swarm")
+var app = utils.NewApp(gitCommit, "Hap Swarm")
 
 // This init function creates the cli.App.
 func init() {
 	app.Action = bzzd
 	app.HideVersion = true // we have a command to print the version
-	app.Copyright = "Copyright 2013-2016 The go-wabei Authors"
+	app.Copyright = "Copyright 2013-2016 The go-hap Authors"
 	app.Commands = []cli.Command{
 		{
 			Action:    version,
@@ -268,12 +268,12 @@ Manage the local chunk database.
 					Description: `
 Export a local chunk database as a tar archive (use - to send to stdout).
 
-    swarm db export ~/.wabei/swarm/bzz-KEY/chunks chunks.tar
+    swarm db export ~/.hap/swarm/bzz-KEY/chunks chunks.tar
 
 The export may be quite large, consider piping the output through the Unix
 pv(1) tool to get a progress bar:
 
-    swarm db export ~/.wabei/swarm/bzz-KEY/chunks - | pv > chunks.tar
+    swarm db export ~/.hap/swarm/bzz-KEY/chunks - | pv > chunks.tar
 `,
 				},
 				{
@@ -284,12 +284,12 @@ pv(1) tool to get a progress bar:
 					Description: `
 Import chunks from a tar archive into a local chunk database (use - to read from stdin).
 
-    swarm db import ~/.wabei/swarm/bzz-KEY/chunks chunks.tar
+    swarm db import ~/.hap/swarm/bzz-KEY/chunks chunks.tar
 
 The import may be quite large, consider piping the input through the Unix
 pv(1) tool to get a progress bar:
 
-    pv chunks.tar | swarm db import ~/.wabei/swarm/bzz-KEY/chunks -
+    pv chunks.tar | swarm db import ~/.hap/swarm/bzz-KEY/chunks -
 `,
 				},
 				{

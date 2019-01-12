@@ -1,20 +1,20 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2014 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
-// Package utils contains internal helper functions for go-wabei commands.
+// Package utils contains internal helper functions for go-hap commands.
 package utils
 
 import (
@@ -27,15 +27,15 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/internal/debug"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/rlp"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/internal/debug"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/rlp"
 )
 
 const (

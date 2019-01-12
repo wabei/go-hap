@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2017 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -27,12 +27,12 @@ import (
 
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/wabei/go-wabei/cmd/utils"
-	"github.com/wabei/go-wabei/dashboard"
-	"github.com/wabei/go-wabei/eth"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/params"
-	whisper "github.com/wabei/go-wabei/whisper/whisperv6"
+	"github.com/wabei/go-hap/cmd/utils"
+	"github.com/wabei/go-hap/dashboard"
+	"github.com/wabei/go-hap/eth"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/params"
+	whisper "github.com/wabei/go-hap/whisper/whisperv6"
 	"github.com/naoina/toml"
 )
 
@@ -171,7 +171,7 @@ func makeFullNode(ctx *cli.Context) *node.Node {
 		utils.RegisterShhService(stack, &cfg.Shh)
 	}
 
-	// Add the Wabei Stats daemon if requested.
+	// Add the Hap Stats daemon if requested.
 	if cfg.Ethstats.URL != "" {
 		utils.RegisterEthStatsService(stack, cfg.Ethstats.URL)
 	}

@@ -5,9 +5,9 @@ This allows DApps not to depend on geth's account management. When a DApp wants 
 the signer, the signer will then provide the user with context and asks the user for permission to sign the data. If
 the users grants the signing request the signer will send the signature back to the DApp.
 
-This setup allows a DApp to connect to a remote Wabei node and send transactions that are locally signed. This can
-help in situations when a DApp is connected to a remote node because a local Wabei node is not available, not
-synchronised with the chain or a particular Wabei node that has no built-in (or limited) account management.
+This setup allows a DApp to connect to a remote Hap node and send transactions that are locally signed. This can
+help in situations when a DApp is connected to a remote node because a local Hap node is not available, not
+synchronised with the chain or a particular Hap node that has no built-in (or limited) account management.
 
 Clef can run as a daemon on the same machine, or off a usb-stick like [usb armory](https://inversepath.com/usbarmory),
 or a separate VM in a [QubesOS](https://www.qubes-os.org/) type os setup.
@@ -24,7 +24,7 @@ COMMANDS:
 
 GLOBAL OPTIONS:
    --loglevel value        log level to emit to the screen (default: 4)
-   --keystore value        Directory for the keystore (default: "$HOME/.wabei/keystore")
+   --keystore value        Directory for the keystore (default: "$HOME/.hap/keystore")
    --configdir value       Directory for clef configuration (default: "$HOME/.clef")
    --networkid value       Network identifier (integer, 1=Frontier, 2=Morden (disused), 3=Ropsten, 4=Rinkeby) (default: 1)
    --lightkdf              Reduce key-derivation RAM & CPU usage at some expense of KDF strength
@@ -46,7 +46,7 @@ GLOBAL OPTIONS:
 
 Example:
 ```
-signer -keystore /my/keystore -chainid 12355
+signer -keystore /my/keystore -chainid 1
 ```
 
 Check out the [tutorial](tutorial.md) for some concrete examples on how the signer works.
@@ -722,12 +722,12 @@ Invoked when a request for account listing has been made.
       "accounts": [
         {
           "type": "Account",
-          "url": "keystore:///home/bazonk/.wabei/keystore/UTC--2017-11-20T14-44-54.089682944Z--123409812340981234098123409812deadbeef42",
+          "url": "keystore:///home/bazonk/.hap/keystore/UTC--2017-11-20T14-44-54.089682944Z--123409812340981234098123409812deadbeef42",
           "address": "0x123409812340981234098123409812deadbeef42"
         },
         {
           "type": "Account",
-          "url": "keystore:///home/bazonk/.wabei/keystore/UTC--2017-11-23T21-59-03.199240693Z--cafebabedeadbeef34098123409812deadbeef42",
+          "url": "keystore:///home/bazonk/.hap/keystore/UTC--2017-11-23T21-59-03.199240693Z--cafebabedeadbeef34098123409812deadbeef42",
           "address": "0xcafebabedeadbeef34098123409812deadbeef42"
         }
       ],
@@ -756,7 +756,7 @@ Invoked when a request for account listing has been made.
     {
       "address": "0x123409812340981234098123409812deadbeef42",
       "raw_data": "0x01020304",
-      "message": "\u0019Wabei Signed Message:\n4\u0001\u0002\u0003\u0004",
+      "message": "\u0019Hap Signed Message:\n4\u0001\u0002\u0003\u0004",
       "hash": "0x7e3a4e7a9d1744bc5c675c25e1234ca8ed9162bd17f78b9085e48047c15ac310",
       "meta": {
         "remote": "signer binary",

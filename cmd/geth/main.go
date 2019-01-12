@@ -1,20 +1,20 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2014 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
-// geth is the official command-line client for Wabei.
+// geth is the official command-line client for Hap.
 package main
 
 import (
@@ -25,16 +25,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wabei/go-wabei/accounts"
-	"github.com/wabei/go-wabei/accounts/keystore"
-	"github.com/wabei/go-wabei/cmd/utils"
-	"github.com/wabei/go-wabei/console"
-	"github.com/wabei/go-wabei/eth"
-	"github.com/wabei/go-wabei/ethclient"
-	"github.com/wabei/go-wabei/internal/debug"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/metrics"
-	"github.com/wabei/go-wabei/node"
+	"github.com/wabei/go-hap/accounts"
+	"github.com/wabei/go-hap/accounts/keystore"
+	"github.com/wabei/go-hap/cmd/utils"
+	"github.com/wabei/go-hap/console"
+	"github.com/wabei/go-hap/eth"
+	"github.com/wabei/go-hap/ethclient"
+	"github.com/wabei/go-hap/internal/debug"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/metrics"
+	"github.com/wabei/go-hap/node"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -46,7 +46,7 @@ var (
 	// Git SHA1 commit hash of the release (set via linker flags)
 	gitCommit = ""
 	// The app that holds all commands and flags.
-	app = utils.NewApp(gitCommit, "the go-wabei command line interface")
+	app = utils.NewApp(gitCommit, "the go-hap command line interface")
 	// flags that configure the node
 	nodeFlags = []cli.Flag{
 		utils.IdentityFlag,
@@ -146,7 +146,7 @@ func init() {
 	// Initialize the CLI app and start Geth
 	app.Action = geth
 	app.HideVersion = true // we have a command to print the version
-	app.Copyright = "Copyright 2013-2018 The go-wabei Authors"
+	app.Copyright = "Copyright 2013-2018 The go-hap Authors"
 	app.Commands = []cli.Command{
 		// See chaincmd.go:
 		initCommand,
@@ -281,13 +281,13 @@ func startNode(ctx *cli.Context, stack *node.Node) {
 	}()
 	// Start auxiliary services if enabled
 	if ctx.GlobalBool(utils.MiningEnabledFlag.Name) || ctx.GlobalBool(utils.DeveloperFlag.Name) {
-		// Mining only makes sense if a full Wabei node is running
+		// Mining only makes sense if a full Hap node is running
 		if ctx.GlobalBool(utils.LightModeFlag.Name) || ctx.GlobalString(utils.SyncModeFlag.Name) == "light" {
 			utils.Fatalf("Light clients do not support mining")
 		}
-		var wabei *eth.Wabei
+		var wabei *eth.Hap
 		if err := stack.Service(&wabei); err != nil {
-			utils.Fatalf("Wabei service not running: %v", err)
+			utils.Fatalf("Hap service not running: %v", err)
 		}
 		// Use a reduced number of threads if requested
 		if threads := ctx.GlobalInt(utils.MinerThreadsFlag.Name); threads > 0 {

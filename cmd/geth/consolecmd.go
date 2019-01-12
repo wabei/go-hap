@@ -1,18 +1,18 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of go-wabei.
+// Copyright 2016 The go-hap Authors
+// This file is part of go-hap.
 //
-// go-wabei is free software: you can redistribute it and/or modify
+// go-hap is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-wabei is distributed in the hope that it will be useful,
+// go-hap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-wabei. If not, see <http://www.gnu.org/licenses/>.
+// along with go-hap. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -24,10 +24,10 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/wabei/go-wabei/cmd/utils"
-	"github.com/wabei/go-wabei/console"
-	"github.com/wabei/go-wabei/node"
-	"github.com/wabei/go-wabei/rpc"
+	"github.com/wabei/go-hap/cmd/utils"
+	"github.com/wabei/go-hap/console"
+	"github.com/wabei/go-hap/node"
+	"github.com/wabei/go-hap/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -43,7 +43,7 @@ var (
 		Description: `
 The Geth console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/wabei/go-wabei/wiki/JavaScript-Console.`,
+See https://github.com/wabei/go-hap/wiki/JavaScript-Console.`,
 	}
 
 	attachCommand = cli.Command{
@@ -56,7 +56,7 @@ See https://github.com/wabei/go-wabei/wiki/JavaScript-Console.`,
 		Description: `
 The Geth console is an interactive shell for the JavaScript runtime environment
 which exposes a node admin interface as well as the Ðapp JavaScript API.
-See https://github.com/wabei/go-wabei/wiki/JavaScript-Console.
+See https://github.com/wabei/go-hap/wiki/JavaScript-Console.
 This command allows to open a console on a running geth node.`,
 	}
 
@@ -69,7 +69,7 @@ This command allows to open a console on a running geth node.`,
 		Category:  "CONSOLE COMMANDS",
 		Description: `
 The JavaScript VM exposes a node admin interface as well as the Ðapp
-JavaScript API. See https://github.com/wabei/go-wabei/wiki/JavaScript-Console`,
+JavaScript API. See https://github.com/wabei/go-hap/wiki/JavaScript-Console`,
 	}
 )
 
