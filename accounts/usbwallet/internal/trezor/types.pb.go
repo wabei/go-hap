@@ -42,9 +42,9 @@ It has these top-level messages:
 	GetPublicKey
 	PublicKey
 	GetAddress
-	WabeiGetAddress
+	HapGetAddress
 	Address
-	WabeiAddress
+	HapAddress
 	WipeDevice
 	LoadDevice
 	ResetDevice
@@ -69,12 +69,12 @@ It has these top-level messages:
 	SimpleSignTx
 	TxRequest
 	TxAck
-	WabeiSignTx
-	WabeiTxRequest
-	WabeiTxAck
-	WabeiSignMessage
-	WabeiVerifyMessage
-	WabeiMessageSignature
+	HapSignTx
+	HapTxRequest
+	HapTxAck
+	HapSignMessage
+	HapVerifyMessage
+	HapMessageSignature
 	SignIdentity
 	SignedIdentity
 	GetECDHSessionKey

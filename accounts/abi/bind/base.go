@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2015 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package bind
 
@@ -22,12 +22,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/wabei/go-wabei"
-	"github.com/wabei/go-wabei/accounts/abi"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/event"
+	"github.com/wabei/go-hap"
+	"github.com/wabei/go-hap/accounts/abi"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/event"
 )
 
 // SignerFn is a signer function callback when a contract requires a method to
@@ -43,9 +43,9 @@ type CallOpts struct {
 }
 
 // TransactOpts is the collection of authorization data required to create a
-// valid Wabei transaction.
+// valid Hap transaction.
 type TransactOpts struct {
-	From   common.Address // Wabei account to send the transaction from
+	From   common.Address // Hap account to send the transaction from
 	Nonce  *big.Int       // Nonce to use for the transaction execution (nil = use pending state)
 	Signer SignerFn       // Method to use for signing the transaction (mandatory)
 
@@ -73,11 +73,11 @@ type WatchOpts struct {
 }
 
 // BoundContract is the base wrapper object that reflects a contract on the
-// Wabei network. It contains a collection of methods that are used by the
+// Hap network. It contains a collection of methods that are used by the
 // higher level contract bindings to operate.
 type BoundContract struct {
-	address    common.Address     // Deployment address of the contract on the Wabei blockchain
-	abi        abi.ABI            // Reflect based ABI to access the correct Wabei methods
+	address    common.Address     // Deployment address of the contract on the Hap blockchain
+	abi        abi.ABI            // Reflect based ABI to access the correct Hap methods
 	caller     ContractCaller     // Read interface to interact with the blockchain
 	transactor ContractTransactor // Write interface to interact with the blockchain
 	filterer   ContractFilterer   // Event filtering to interact with the blockchain
@@ -95,7 +95,7 @@ func NewBoundContract(address common.Address, abi abi.ABI, caller ContractCaller
 	}
 }
 
-// DeployContract deploys a contract onto the Wabei blockchain and binds the
+// DeployContract deploys a contract onto the Hap blockchain and binds the
 // deployment address with a Go wrapper.
 func DeployContract(opts *TransactOpts, abi abi.ABI, bytecode []byte, backend ContractBackend, params ...interface{}) (common.Address, *types.Transaction, *BoundContract, error) {
 	// Otherwise try to deploy the contract

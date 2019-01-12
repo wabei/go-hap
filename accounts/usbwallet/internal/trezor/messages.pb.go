@@ -70,17 +70,17 @@ const (
 	MessageType_MessageType_SignIdentity             MessageType = 53
 	MessageType_MessageType_SignedIdentity           MessageType = 54
 	MessageType_MessageType_GetFeatures              MessageType = 55
-	MessageType_MessageType_WabeiGetAddress       MessageType = 56
-	MessageType_MessageType_WabeiAddress          MessageType = 57
-	MessageType_MessageType_WabeiSignTx           MessageType = 58
-	MessageType_MessageType_WabeiTxRequest        MessageType = 59
-	MessageType_MessageType_WabeiTxAck            MessageType = 60
+	MessageType_MessageType_HapGetAddress       MessageType = 56
+	MessageType_MessageType_HapAddress          MessageType = 57
+	MessageType_MessageType_HapSignTx           MessageType = 58
+	MessageType_MessageType_HapTxRequest        MessageType = 59
+	MessageType_MessageType_HapTxAck            MessageType = 60
 	MessageType_MessageType_GetECDHSessionKey        MessageType = 61
 	MessageType_MessageType_ECDHSessionKey           MessageType = 62
 	MessageType_MessageType_SetU2FCounter            MessageType = 63
-	MessageType_MessageType_WabeiSignMessage      MessageType = 64
-	MessageType_MessageType_WabeiVerifyMessage    MessageType = 65
-	MessageType_MessageType_WabeiMessageSignature MessageType = 66
+	MessageType_MessageType_HapSignMessage      MessageType = 64
+	MessageType_MessageType_HapVerifyMessage    MessageType = 65
+	MessageType_MessageType_HapMessageSignature MessageType = 66
 	MessageType_MessageType_DebugLinkDecision        MessageType = 100
 	MessageType_MessageType_DebugLinkGetState        MessageType = 101
 	MessageType_MessageType_DebugLinkState           MessageType = 102
@@ -146,17 +146,17 @@ var MessageType_name = map[int32]string{
 	53:  "MessageType_SignIdentity",
 	54:  "MessageType_SignedIdentity",
 	55:  "MessageType_GetFeatures",
-	56:  "MessageType_WabeiGetAddress",
-	57:  "MessageType_WabeiAddress",
-	58:  "MessageType_WabeiSignTx",
-	59:  "MessageType_WabeiTxRequest",
-	60:  "MessageType_WabeiTxAck",
+	56:  "MessageType_HapGetAddress",
+	57:  "MessageType_HapAddress",
+	58:  "MessageType_HapSignTx",
+	59:  "MessageType_HapTxRequest",
+	60:  "MessageType_HapTxAck",
 	61:  "MessageType_GetECDHSessionKey",
 	62:  "MessageType_ECDHSessionKey",
 	63:  "MessageType_SetU2FCounter",
-	64:  "MessageType_WabeiSignMessage",
-	65:  "MessageType_WabeiVerifyMessage",
-	66:  "MessageType_WabeiMessageSignature",
+	64:  "MessageType_HapSignMessage",
+	65:  "MessageType_HapVerifyMessage",
+	66:  "MessageType_HapMessageSignature",
 	100: "MessageType_DebugLinkDecision",
 	101: "MessageType_DebugLinkGetState",
 	102: "MessageType_DebugLinkState",
@@ -221,17 +221,17 @@ var MessageType_value = map[string]int32{
 	"MessageType_SignIdentity":             53,
 	"MessageType_SignedIdentity":           54,
 	"MessageType_GetFeatures":              55,
-	"MessageType_WabeiGetAddress":       56,
-	"MessageType_WabeiAddress":          57,
-	"MessageType_WabeiSignTx":           58,
-	"MessageType_WabeiTxRequest":        59,
-	"MessageType_WabeiTxAck":            60,
+	"MessageType_HapGetAddress":       56,
+	"MessageType_HapAddress":          57,
+	"MessageType_HapSignTx":           58,
+	"MessageType_HapTxRequest":        59,
+	"MessageType_HapTxAck":            60,
 	"MessageType_GetECDHSessionKey":        61,
 	"MessageType_ECDHSessionKey":           62,
 	"MessageType_SetU2FCounter":            63,
-	"MessageType_WabeiSignMessage":      64,
-	"MessageType_WabeiVerifyMessage":    65,
-	"MessageType_WabeiMessageSignature": 66,
+	"MessageType_HapSignMessage":      64,
+	"MessageType_HapVerifyMessage":    65,
+	"MessageType_HapMessageSignature": 66,
 	"MessageType_DebugLinkDecision":        100,
 	"MessageType_DebugLinkGetState":        101,
 	"MessageType_DebugLinkState":           102,
@@ -954,29 +954,29 @@ func (m *GetAddress) GetScriptType() InputScriptType {
 }
 
 // *
-// Request: Ask device for Wabei address corresponding to address_n path
+// Request: Ask device for Hap address corresponding to address_n path
 // @next PassphraseRequest
-// @next WabeiAddress
+// @next HapAddress
 // @next Failure
-type WabeiGetAddress struct {
+type HapGetAddress struct {
 	AddressN         []uint32 `protobuf:"varint,1,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
 	ShowDisplay      *bool    `protobuf:"varint,2,opt,name=show_display,json=showDisplay" json:"show_display,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *WabeiGetAddress) Reset()                    { *m = WabeiGetAddress{} }
-func (m *WabeiGetAddress) String() string            { return proto.CompactTextString(m) }
-func (*WabeiGetAddress) ProtoMessage()               {}
-func (*WabeiGetAddress) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{22} }
+func (m *HapGetAddress) Reset()                    { *m = HapGetAddress{} }
+func (m *HapGetAddress) String() string            { return proto.CompactTextString(m) }
+func (*HapGetAddress) ProtoMessage()               {}
+func (*HapGetAddress) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{22} }
 
-func (m *WabeiGetAddress) GetAddressN() []uint32 {
+func (m *HapGetAddress) GetAddressN() []uint32 {
 	if m != nil {
 		return m.AddressN
 	}
 	return nil
 }
 
-func (m *WabeiGetAddress) GetShowDisplay() bool {
+func (m *HapGetAddress) GetShowDisplay() bool {
 	if m != nil && m.ShowDisplay != nil {
 		return *m.ShowDisplay
 	}
@@ -1004,19 +1004,19 @@ func (m *Address) GetAddress() string {
 }
 
 // *
-// Response: Contains an Wabei address derived from device private seed
-// @prev WabeiGetAddress
-type WabeiAddress struct {
+// Response: Contains an Hap address derived from device private seed
+// @prev HapGetAddress
+type HapAddress struct {
 	Address          []byte `protobuf:"bytes,1,req,name=address" json:"address,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *WabeiAddress) Reset()                    { *m = WabeiAddress{} }
-func (m *WabeiAddress) String() string            { return proto.CompactTextString(m) }
-func (*WabeiAddress) ProtoMessage()               {}
-func (*WabeiAddress) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{24} }
+func (m *HapAddress) Reset()                    { *m = HapAddress{} }
+func (m *HapAddress) String() string            { return proto.CompactTextString(m) }
+func (*HapAddress) ProtoMessage()               {}
+func (*HapAddress) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{24} }
 
-func (m *WabeiAddress) GetAddress() []byte {
+func (m *HapAddress) GetAddress() []byte {
 	if m != nil {
 		return m.Address
 	}
@@ -2006,9 +2006,9 @@ func (m *TxAck) GetTx() *TransactionType {
 // Note: the first at most 1024 bytes of data MUST be transmitted as part of this message.
 // @next PassphraseRequest
 // @next PinMatrixRequest
-// @next WabeiTxRequest
+// @next HapTxRequest
 // @next Failure
-type WabeiSignTx struct {
+type HapSignTx struct {
 	AddressN         []uint32 `protobuf:"varint,1,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
 	Nonce            []byte   `protobuf:"bytes,2,opt,name=nonce" json:"nonce,omitempty"`
 	GasPrice         []byte   `protobuf:"bytes,3,opt,name=gas_price,json=gasPrice" json:"gas_price,omitempty"`
@@ -2021,68 +2021,68 @@ type WabeiSignTx struct {
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *WabeiSignTx) Reset()                    { *m = WabeiSignTx{} }
-func (m *WabeiSignTx) String() string            { return proto.CompactTextString(m) }
-func (*WabeiSignTx) ProtoMessage()               {}
-func (*WabeiSignTx) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{49} }
+func (m *HapSignTx) Reset()                    { *m = HapSignTx{} }
+func (m *HapSignTx) String() string            { return proto.CompactTextString(m) }
+func (*HapSignTx) ProtoMessage()               {}
+func (*HapSignTx) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{49} }
 
-func (m *WabeiSignTx) GetAddressN() []uint32 {
+func (m *HapSignTx) GetAddressN() []uint32 {
 	if m != nil {
 		return m.AddressN
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetNonce() []byte {
+func (m *HapSignTx) GetNonce() []byte {
 	if m != nil {
 		return m.Nonce
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetGasPrice() []byte {
+func (m *HapSignTx) GetGasPrice() []byte {
 	if m != nil {
 		return m.GasPrice
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetGasLimit() []byte {
+func (m *HapSignTx) GetGasLimit() []byte {
 	if m != nil {
 		return m.GasLimit
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetTo() []byte {
+func (m *HapSignTx) GetTo() []byte {
 	if m != nil {
 		return m.To
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetValue() []byte {
+func (m *HapSignTx) GetValue() []byte {
 	if m != nil {
 		return m.Value
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetDataInitialChunk() []byte {
+func (m *HapSignTx) GetDataInitialChunk() []byte {
 	if m != nil {
 		return m.DataInitialChunk
 	}
 	return nil
 }
 
-func (m *WabeiSignTx) GetDataLength() uint32 {
+func (m *HapSignTx) GetDataLength() uint32 {
 	if m != nil && m.DataLength != nil {
 		return *m.DataLength
 	}
 	return 0
 }
 
-func (m *WabeiSignTx) GetChainId() uint32 {
+func (m *HapSignTx) GetChainId() uint32 {
 	if m != nil && m.ChainId != nil {
 		return *m.ChainId
 	}
@@ -2093,9 +2093,9 @@ func (m *WabeiSignTx) GetChainId() uint32 {
 // Response: Device asks for more data from transaction payload, or returns the signature.
 // If data_length is set, device awaits that many more bytes of payload.
 // Otherwise, the signature_* fields contain the computed transaction signature. All three fields will be present.
-// @prev WabeiSignTx
-// @next WabeiTxAck
-type WabeiTxRequest struct {
+// @prev HapSignTx
+// @next HapTxAck
+type HapTxRequest struct {
 	DataLength       *uint32 `protobuf:"varint,1,opt,name=data_length,json=dataLength" json:"data_length,omitempty"`
 	SignatureV       *uint32 `protobuf:"varint,2,opt,name=signature_v,json=signatureV" json:"signature_v,omitempty"`
 	SignatureR       []byte  `protobuf:"bytes,3,opt,name=signature_r,json=signatureR" json:"signature_r,omitempty"`
@@ -2103,33 +2103,33 @@ type WabeiTxRequest struct {
 	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *WabeiTxRequest) Reset()                    { *m = WabeiTxRequest{} }
-func (m *WabeiTxRequest) String() string            { return proto.CompactTextString(m) }
-func (*WabeiTxRequest) ProtoMessage()               {}
-func (*WabeiTxRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{50} }
+func (m *HapTxRequest) Reset()                    { *m = HapTxRequest{} }
+func (m *HapTxRequest) String() string            { return proto.CompactTextString(m) }
+func (*HapTxRequest) ProtoMessage()               {}
+func (*HapTxRequest) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{50} }
 
-func (m *WabeiTxRequest) GetDataLength() uint32 {
+func (m *HapTxRequest) GetDataLength() uint32 {
 	if m != nil && m.DataLength != nil {
 		return *m.DataLength
 	}
 	return 0
 }
 
-func (m *WabeiTxRequest) GetSignatureV() uint32 {
+func (m *HapTxRequest) GetSignatureV() uint32 {
 	if m != nil && m.SignatureV != nil {
 		return *m.SignatureV
 	}
 	return 0
 }
 
-func (m *WabeiTxRequest) GetSignatureR() []byte {
+func (m *HapTxRequest) GetSignatureR() []byte {
 	if m != nil {
 		return m.SignatureR
 	}
 	return nil
 }
 
-func (m *WabeiTxRequest) GetSignatureS() []byte {
+func (m *HapTxRequest) GetSignatureS() []byte {
 	if m != nil {
 		return m.SignatureS
 	}
@@ -2138,19 +2138,19 @@ func (m *WabeiTxRequest) GetSignatureS() []byte {
 
 // *
 // Request: Transaction payload data.
-// @prev WabeiTxRequest
-// @next WabeiTxRequest
-type WabeiTxAck struct {
+// @prev HapTxRequest
+// @next HapTxRequest
+type HapTxAck struct {
 	DataChunk        []byte `protobuf:"bytes,1,opt,name=data_chunk,json=dataChunk" json:"data_chunk,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *WabeiTxAck) Reset()                    { *m = WabeiTxAck{} }
-func (m *WabeiTxAck) String() string            { return proto.CompactTextString(m) }
-func (*WabeiTxAck) ProtoMessage()               {}
-func (*WabeiTxAck) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{51} }
+func (m *HapTxAck) Reset()                    { *m = HapTxAck{} }
+func (m *HapTxAck) String() string            { return proto.CompactTextString(m) }
+func (*HapTxAck) ProtoMessage()               {}
+func (*HapTxAck) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{51} }
 
-func (m *WabeiTxAck) GetDataChunk() []byte {
+func (m *HapTxAck) GetDataChunk() []byte {
 	if m != nil {
 		return m.DataChunk
 	}
@@ -2159,27 +2159,27 @@ func (m *WabeiTxAck) GetDataChunk() []byte {
 
 // *
 // Request: Ask device to sign message
-// @next WabeiMessageSignature
+// @next HapMessageSignature
 // @next Failure
-type WabeiSignMessage struct {
+type HapSignMessage struct {
 	AddressN         []uint32 `protobuf:"varint,1,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
 	Message          []byte   `protobuf:"bytes,2,req,name=message" json:"message,omitempty"`
 	XXX_unrecognized []byte   `json:"-"`
 }
 
-func (m *WabeiSignMessage) Reset()                    { *m = WabeiSignMessage{} }
-func (m *WabeiSignMessage) String() string            { return proto.CompactTextString(m) }
-func (*WabeiSignMessage) ProtoMessage()               {}
-func (*WabeiSignMessage) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{52} }
+func (m *HapSignMessage) Reset()                    { *m = HapSignMessage{} }
+func (m *HapSignMessage) String() string            { return proto.CompactTextString(m) }
+func (*HapSignMessage) ProtoMessage()               {}
+func (*HapSignMessage) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{52} }
 
-func (m *WabeiSignMessage) GetAddressN() []uint32 {
+func (m *HapSignMessage) GetAddressN() []uint32 {
 	if m != nil {
 		return m.AddressN
 	}
 	return nil
 }
 
-func (m *WabeiSignMessage) GetMessage() []byte {
+func (m *HapSignMessage) GetMessage() []byte {
 	if m != nil {
 		return m.Message
 	}
@@ -2190,33 +2190,33 @@ func (m *WabeiSignMessage) GetMessage() []byte {
 // Request: Ask device to verify message
 // @next Success
 // @next Failure
-type WabeiVerifyMessage struct {
+type HapVerifyMessage struct {
 	Address          []byte `protobuf:"bytes,1,opt,name=address" json:"address,omitempty"`
 	Signature        []byte `protobuf:"bytes,2,opt,name=signature" json:"signature,omitempty"`
 	Message          []byte `protobuf:"bytes,3,opt,name=message" json:"message,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *WabeiVerifyMessage) Reset()                    { *m = WabeiVerifyMessage{} }
-func (m *WabeiVerifyMessage) String() string            { return proto.CompactTextString(m) }
-func (*WabeiVerifyMessage) ProtoMessage()               {}
-func (*WabeiVerifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{53} }
+func (m *HapVerifyMessage) Reset()                    { *m = HapVerifyMessage{} }
+func (m *HapVerifyMessage) String() string            { return proto.CompactTextString(m) }
+func (*HapVerifyMessage) ProtoMessage()               {}
+func (*HapVerifyMessage) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{53} }
 
-func (m *WabeiVerifyMessage) GetAddress() []byte {
+func (m *HapVerifyMessage) GetAddress() []byte {
 	if m != nil {
 		return m.Address
 	}
 	return nil
 }
 
-func (m *WabeiVerifyMessage) GetSignature() []byte {
+func (m *HapVerifyMessage) GetSignature() []byte {
 	if m != nil {
 		return m.Signature
 	}
 	return nil
 }
 
-func (m *WabeiVerifyMessage) GetMessage() []byte {
+func (m *HapVerifyMessage) GetMessage() []byte {
 	if m != nil {
 		return m.Message
 	}
@@ -2225,26 +2225,26 @@ func (m *WabeiVerifyMessage) GetMessage() []byte {
 
 // *
 // Response: Signed message
-// @prev WabeiSignMessage
-type WabeiMessageSignature struct {
+// @prev HapSignMessage
+type HapMessageSignature struct {
 	Address          []byte `protobuf:"bytes,1,opt,name=address" json:"address,omitempty"`
 	Signature        []byte `protobuf:"bytes,2,opt,name=signature" json:"signature,omitempty"`
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *WabeiMessageSignature) Reset()                    { *m = WabeiMessageSignature{} }
-func (m *WabeiMessageSignature) String() string            { return proto.CompactTextString(m) }
-func (*WabeiMessageSignature) ProtoMessage()               {}
-func (*WabeiMessageSignature) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{54} }
+func (m *HapMessageSignature) Reset()                    { *m = HapMessageSignature{} }
+func (m *HapMessageSignature) String() string            { return proto.CompactTextString(m) }
+func (*HapMessageSignature) ProtoMessage()               {}
+func (*HapMessageSignature) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{54} }
 
-func (m *WabeiMessageSignature) GetAddress() []byte {
+func (m *HapMessageSignature) GetAddress() []byte {
 	if m != nil {
 		return m.Address
 	}
 	return nil
 }
 
-func (m *WabeiMessageSignature) GetSignature() []byte {
+func (m *HapMessageSignature) GetSignature() []byte {
 	if m != nil {
 		return m.Signature
 	}
@@ -2806,9 +2806,9 @@ func init() {
 	proto.RegisterType((*GetPublicKey)(nil), "GetPublicKey")
 	proto.RegisterType((*PublicKey)(nil), "PublicKey")
 	proto.RegisterType((*GetAddress)(nil), "GetAddress")
-	proto.RegisterType((*WabeiGetAddress)(nil), "WabeiGetAddress")
+	proto.RegisterType((*HapGetAddress)(nil), "HapGetAddress")
 	proto.RegisterType((*Address)(nil), "Address")
-	proto.RegisterType((*WabeiAddress)(nil), "WabeiAddress")
+	proto.RegisterType((*HapAddress)(nil), "HapAddress")
 	proto.RegisterType((*WipeDevice)(nil), "WipeDevice")
 	proto.RegisterType((*LoadDevice)(nil), "LoadDevice")
 	proto.RegisterType((*ResetDevice)(nil), "ResetDevice")
@@ -2833,12 +2833,12 @@ func init() {
 	proto.RegisterType((*SimpleSignTx)(nil), "SimpleSignTx")
 	proto.RegisterType((*TxRequest)(nil), "TxRequest")
 	proto.RegisterType((*TxAck)(nil), "TxAck")
-	proto.RegisterType((*WabeiSignTx)(nil), "WabeiSignTx")
-	proto.RegisterType((*WabeiTxRequest)(nil), "WabeiTxRequest")
-	proto.RegisterType((*WabeiTxAck)(nil), "WabeiTxAck")
-	proto.RegisterType((*WabeiSignMessage)(nil), "WabeiSignMessage")
-	proto.RegisterType((*WabeiVerifyMessage)(nil), "WabeiVerifyMessage")
-	proto.RegisterType((*WabeiMessageSignature)(nil), "WabeiMessageSignature")
+	proto.RegisterType((*HapSignTx)(nil), "HapSignTx")
+	proto.RegisterType((*HapTxRequest)(nil), "HapTxRequest")
+	proto.RegisterType((*HapTxAck)(nil), "HapTxAck")
+	proto.RegisterType((*HapSignMessage)(nil), "HapSignMessage")
+	proto.RegisterType((*HapVerifyMessage)(nil), "HapVerifyMessage")
+	proto.RegisterType((*HapMessageSignature)(nil), "HapMessageSignature")
 	proto.RegisterType((*SignIdentity)(nil), "SignIdentity")
 	proto.RegisterType((*SignedIdentity)(nil), "SignedIdentity")
 	proto.RegisterType((*GetECDHSessionKey)(nil), "GetECDHSessionKey")

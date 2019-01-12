@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2015 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package backends
 
@@ -24,21 +24,21 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wabei/go-wabei"
-	"github.com/wabei/go-wabei/accounts/abi/bind"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/math"
-	"github.com/wabei/go-wabei/consensus/wabash"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/core/bloombits"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/core/vm"
-	"github.com/wabei/go-wabei/eth/filters"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/event"
-	"github.com/wabei/go-wabei/params"
-	"github.com/wabei/go-wabei/rpc"
+	"github.com/wabei/go-hap"
+	"github.com/wabei/go-hap/accounts/abi/bind"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/math"
+	"github.com/wabei/go-hap/consensus/wabash"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/core/bloombits"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/core/vm"
+	"github.com/wabei/go-hap/eth/filters"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/event"
+	"github.com/wabei/go-hap/params"
+	"github.com/wabei/go-hap/rpc"
 )
 
 // This nil assignment ensures compile time that SimulatedBackend implements bind.ContractBackend.
@@ -51,7 +51,7 @@ var errGasEstimationFailed = errors.New("gas required exceeds allowance or alway
 // the background. Its main purpose is to allow easily testing contract bindings.
 type SimulatedBackend struct {
 	database   ethdb.Database   // In memory database to store our testing data
-	blockchain *core.BlockChain // Wabei blockchain to handle the consensus
+	blockchain *core.BlockChain // Hap blockchain to handle the consensus
 
 	mu           sync.Mutex
 	pendingBlock *types.Block   // Currently pending block that will be imported on request

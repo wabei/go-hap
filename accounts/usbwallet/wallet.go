@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2017 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package usbwallet implements support for USB hardware wallets.
 package usbwallet
@@ -25,11 +25,11 @@ import (
 	"sync"
 	"time"
 
-	wabei "github.com/wabei/go-wabei"
-	"github.com/wabei/go-wabei/accounts"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/log"
+	wabei "github.com/wabei/go-hap"
+	"github.com/wabei/go-hap/accounts"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/log"
 	"github.com/karalabe/hid"
 )
 
@@ -59,7 +59,7 @@ type driver interface {
 	// is still online and healthy.
 	Heartbeat() error
 
-	// Derive sends a derivation request to the USB device and returns the Wabei
+	// Derive sends a derivation request to the USB device and returns the Hap
 	// address located on that path.
 	Derive(path accounts.DerivationPath) (common.Address, error)
 
@@ -346,7 +346,7 @@ func (w *wallet) selfDerive() {
 			context = context.Background()
 		)
 		for empty := false; !empty; {
-			// Retrieve the next derived Wabei account
+			// Retrieve the next derived Hap account
 			if nextAddr == (common.Address{}) {
 				if nextAddr, err = w.driver.Derive(nextPath); err != nil {
 					w.log.Warn("USB wallet account derivation failed", "err", err)
@@ -505,7 +505,7 @@ func (w *wallet) SignHash(account accounts.Account, hash []byte) ([]byte, error)
 // wallet to request a confirmation from the user. It returns either the signed
 // transaction or a failure if the user denied the transaction.
 //
-// Note, if the version of the Wabei application running on the Ledger wallet is
+// Note, if the version of the Hap application running on the Ledger wallet is
 // too old to sign EIP-155 transactions, but such is requested nonetheless, an error
 // will be returned opposed to silently signing in Homestead mode.
 func (w *wallet) SignTx(account accounts.Account, tx *types.Transaction, chainID *big.Int) (*types.Transaction, error) {
