@@ -1,18 +1,18 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2014 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package core
 
@@ -25,15 +25,15 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/hexutil"
-	"github.com/wabei/go-wabei/common/math"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/params"
-	"github.com/wabei/go-wabei/rlp"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/hexutil"
+	"github.com/wabei/go-hap/common/math"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/params"
+	"github.com/wabei/go-hap/rlp"
 )
 
 //go:generate gencodec -type Genesis -field-override genesisSpecMarshaling -out gen_genesis.go
@@ -308,14 +308,14 @@ func GenesisBlockForTesting(db ethdb.Database, addr common.Address, balance *big
 	return g.MustCommit(db)
 }
 
-// DefaultGenesisBlock returns the Wabei main net genesis block.
+// DefaultGenesisBlock returns the Hap main net genesis block.
 func DefaultGenesisBlock() *Genesis {
 	return &Genesis{
 		Config:     params.MainnetChainConfig,
 		Nonce:      0,
 		ExtraData:  hexutil.MustDecode("0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fb"),
 		GasLimit:   200000,
-		Difficulty: big.NewInt(2500000),
+		Difficulty: big.NewInt(250000),
 		Alloc:      decodePrealloc(mainnetAllocData),
 	}
 }

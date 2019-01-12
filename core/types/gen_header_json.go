@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/hexutil"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/hexutil"
 )
 
 var _ = (*headerMarshaling)(nil)

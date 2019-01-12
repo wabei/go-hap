@@ -1,18 +1,18 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2014 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package core
 
@@ -25,13 +25,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/event"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/metrics"
-	"github.com/wabei/go-wabei/params"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/event"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/metrics"
+	"github.com/wabei/go-hap/params"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 )
 

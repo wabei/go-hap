@@ -1,20 +1,20 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2014 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package types contains data types related to Wabei consensus.
+// Package types contains data types related to Hap consensus.
 package types
 
 import (
@@ -26,10 +26,10 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/hexutil"
-	"github.com/wabei/go-wabei/crypto/sha3"
-	"github.com/wabei/go-wabei/rlp"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/hexutil"
+	"github.com/wabei/go-hap/crypto/sha3"
+	"github.com/wabei/go-hap/rlp"
 )
 
 var (
@@ -66,7 +66,7 @@ func (n *BlockNonce) UnmarshalText(input []byte) error {
 
 //go:generate gencodec -type Header -field-override headerMarshaling -out gen_header_json.go
 
-// Header represents a block header in the Wabei blockchain.
+// Header represents a block header in the Hap blockchain.
 type Header struct {
 	ParentHash  common.Hash    `json:"parentHash"       gencodec:"required"`
 	UncleHash   common.Hash    `json:"sha3Uncles"       gencodec:"required"`
@@ -141,7 +141,7 @@ type Body struct {
 	Uncles       []*Header
 }
 
-// Block represents an entire block in the Wabei blockchain.
+// Block represents an entire block in the Hap blockchain.
 type Block struct {
 	header       *Header
 	uncles       []*Header
@@ -256,7 +256,7 @@ func CopyHeader(h *Header) *Header {
 	return &cpy
 }
 
-// DecodeRLP decodes the Wabei
+// DecodeRLP decodes the Hap
 func (b *Block) DecodeRLP(s *rlp.Stream) error {
 	var eb extblock
 	_, size, _ := s.Kind()
@@ -268,7 +268,7 @@ func (b *Block) DecodeRLP(s *rlp.Stream) error {
 	return nil
 }
 
-// EncodeRLP serializes b into the Wabei RLP block format.
+// EncodeRLP serializes b into the Hap RLP block format.
 func (b *Block) EncodeRLP(w io.Writer) error {
 	return rlp.Encode(w, extblock{
 		Header: b.header,

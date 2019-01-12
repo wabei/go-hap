@@ -1,18 +1,18 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2014 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package core
 
@@ -24,14 +24,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/consensus/wabash"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/core/vm"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/params"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/consensus/wabash"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/core/vm"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/params"
 )
 
 // Test fork of length N starting from block i
@@ -1196,7 +1196,7 @@ func TestEIP161AccountRemoval(t *testing.T) {
 // tests that under weird reorg conditions the blockchain and its internal header-
 // chain return the same latest block/header.
 //
-// https://github.com/wabei/go-wabei/pull/15941
+// https://github.com/wabei/go-hap/pull/15941
 func TestBlockchainHeaderchainReorgConsistency(t *testing.T) {
 	// Generate a canonical chain to act as the main dataset
 	engine := wabash.NewFaker()
