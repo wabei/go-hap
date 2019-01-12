@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2017 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package clique
 
@@ -22,12 +22,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/ethdb"
-	"github.com/wabei/go-wabei/params"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/ethdb"
+	"github.com/wabei/go-hap/params"
 )
 
 type testerVote struct {
@@ -37,7 +37,7 @@ type testerVote struct {
 }
 
 // testerAccountPool is a pool to maintain currently active tester accounts,
-// mapped from textual names used in the tests below to actual Wabei private
+// mapped from textual names used in the tests below to actual Hap private
 // keys capable of signing transactions.
 type testerAccountPool struct {
 	accounts map[string]*ecdsa.PrivateKey
@@ -64,7 +64,7 @@ func (ap *testerAccountPool) address(account string) common.Address {
 	if ap.accounts[account] == nil {
 		ap.accounts[account], _ = crypto.GenerateKey()
 	}
-	// Resolve and return the Wabei address
+	// Resolve and return the Hap address
 	return crypto.PubkeyToAddress(ap.accounts[account].PublicKey)
 }
 

@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2017 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package wabash implements the wabash proof-of-work consensus engine.
 package wabash
@@ -33,10 +33,10 @@ import (
 	"unsafe"
 
 	mmap "github.com/edsrzf/mmap-go"
-	"github.com/wabei/go-wabei/consensus"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/metrics"
-	"github.com/wabei/go-wabei/rpc"
+	"github.com/wabei/go-hap/consensus"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/metrics"
+	"github.com/wabei/go-hap/rpc"
 	"github.com/hashicorp/golang-lru/simplelru"
 )
 
@@ -439,7 +439,7 @@ func NewTester() *Wabash {
 }
 
 // NewFaker creates a wabash consensus engine with a fake PoW scheme that accepts
-// all blocks' seal as valid, though they still have to conform to the Wabei
+// all blocks' seal as valid, though they still have to conform to the Hap
 // consensus rules.
 func NewFaker() *Wabash {
 	return &Wabash{
@@ -451,7 +451,7 @@ func NewFaker() *Wabash {
 
 // NewFakeFailer creates a wabash consensus engine with a fake PoW scheme that
 // accepts all blocks as valid apart from the single one specified, though they
-// still have to conform to the Wabei consensus rules.
+// still have to conform to the Hap consensus rules.
 func NewFakeFailer(fail uint64) *Wabash {
 	return &Wabash{
 		config: Config{
@@ -463,7 +463,7 @@ func NewFakeFailer(fail uint64) *Wabash {
 
 // NewFakeDelayer creates a wabash consensus engine with a fake PoW scheme that
 // accepts all blocks as valid, but delays verifications by some time, though
-// they still have to conform to the Wabei consensus rules.
+// they still have to conform to the Hap consensus rules.
 func NewFakeDelayer(delay time.Duration) *Wabash {
 	return &Wabash{
 		config: Config{

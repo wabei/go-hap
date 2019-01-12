@@ -1,18 +1,18 @@
-// Copyright 2017 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2017 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package wabash
 
@@ -24,20 +24,20 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/math"
-	"github.com/wabei/go-wabei/consensus"
-	"github.com/wabei/go-wabei/consensus/misc"
-	"github.com/wabei/go-wabei/core/state"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/params"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/math"
+	"github.com/wabei/go-hap/consensus"
+	"github.com/wabei/go-hap/consensus/misc"
+	"github.com/wabei/go-hap/core/state"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/params"
 	set "gopkg.in/fatih/set.v0"
 )
 
 // Wabash proof-of-work protocol constants.
 var (
-	FrontierBlockReward    *big.Int = big.NewInt(5e+16) // Block reward in wei for successfully mining a block
-	ByzantiumBlockReward   *big.Int = big.NewInt(3e+16) // Block reward in wei for successfully mining a block upward from Byzantium
+	FrontierBlockReward    *big.Int = big.NewInt(15e+17) // Block reward in wei for successfully mining a block
+	ByzantiumBlockReward   *big.Int = big.NewInt(9e+17) // Block reward in wei for successfully mining a block upward from Byzantium
 	maxUncles                       = 2                 // Maximum number of uncles allowed in a single block
 	allowedFutureBlockTime          = 15 * time.Second  // Max time from current time allowed for blocks, before they're considered future blocks
 )
@@ -65,7 +65,7 @@ func (wabash *Wabash) Author(header *types.Header) (common.Address, error) {
 }
 
 // VerifyHeader checks whether a header conforms to the consensus rules of the
-// stock Wabei wabash engine.
+// stock Hap wabash engine.
 func (wabash *Wabash) VerifyHeader(chain consensus.ChainReader, header *types.Header, seal bool) error {
 	// If we're running a full engine faking, accept any input as valid
 	if wabash.config.PowMode == ModeFullFake {
@@ -166,7 +166,7 @@ func (wabash *Wabash) verifyHeaderWorker(chain consensus.ChainReader, headers []
 }
 
 // VerifyUncles verifies that the given block's uncles conform to the consensus
-// rules of the stock Wabei wabash engine.
+// rules of the stock Hap wabash engine.
 func (wabash *Wabash) VerifyUncles(chain consensus.ChainReader, block *types.Block) error {
 	// If we're running a full engine faking, accept any input as valid
 	if wabash.config.PowMode == ModeFullFake {
@@ -218,7 +218,7 @@ func (wabash *Wabash) VerifyUncles(chain consensus.ChainReader, block *types.Blo
 }
 
 // verifyHeader checks whether a header conforms to the consensus rules of the
-// stock Wabei wabash engine.
+// stock Hap wabash engine.
 // See YP section 4.3.4. "Block Header Validity"
 func (wabash *Wabash) verifyHeader(chain consensus.ChainReader, header, parent *types.Header, uncle bool, seal bool) error {
 	// Ensure that the header's extra-data section is of a reasonable size
