@@ -3,9 +3,9 @@ InstallDir "$InstDir"
 OutFile "${OUTPUTFILE}" # set through command line arguments
 
 # Links for "Add/Remove Programs"
-!define HELPURL "https://github.com/wabei/go-wabei/issues"
-!define UPDATEURL "https://github.com/wabei/go-wabei/releases"
-!define ABOUTURL "https://github.com/wabei/go-wabei#wabei-go"
+!define HELPURL "https://github.com/wabei/go-hap/issues"
+!define UPDATEURL "https://github.com/wabei/go-hap/releases"
+!define ABOUTURL "https://github.com/wabei/go-hap#wabei-go"
 !define /date NOW "%Y%m%d"
 
 PageEx license
@@ -29,9 +29,9 @@ Section "Geth" GETH_IDX
   SimpleFC::AdvRemoveRule "Geth UDP discovery (UDP:17899)"
 
   # Firewall - add rules
-  SimpleFC::AdvAddRule "Geth incoming peers (TCP:17899)" ""  6 1 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Wabei" 17899 "" "" ""
-  SimpleFC::AdvAddRule "Geth outgoing peers (TCP:17899)" ""  6 2 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Wabei" "" 17899 "" ""
-  SimpleFC::AdvAddRule "Geth UDP discovery (UDP:17899)" "" 17 2 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Wabei" "" 17899 "" ""
+  SimpleFC::AdvAddRule "Geth incoming peers (TCP:17899)" ""  6 1 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Hap" 17899 "" "" ""
+  SimpleFC::AdvAddRule "Geth outgoing peers (TCP:17899)" ""  6 2 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Hap" "" 17899 "" ""
+  SimpleFC::AdvAddRule "Geth UDP discovery (UDP:17899)" "" 17 2 1 2147483647 1 "$INSTDIR\geth.exe" "" "" "Hap" "" 17899 "" ""
 
   # Set default IPC endpoint (https://github.com/wabei/EIPs/issues/147)
   ${EnvVarUpdate} $0 "WABEI_SOCKET" "R" "HKLM" "\\.\pipe\geth.ipc"

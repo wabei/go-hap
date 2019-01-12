@@ -11,10 +11,10 @@ fi
 workspace="$PWD/build/_workspace"
 root="$PWD"
 ethdir="$workspace/src/github.com/wabei"
-if [ ! -L "$ethdir/go-wabei" ]; then
+if [ ! -L "$ethdir/go-hap" ]; then
     mkdir -p "$ethdir"
     cd "$ethdir"
-    ln -s ../../../../../. go-wabei
+    ln -s ../../../../../. go-hap
     cd "$root"
 fi
 
@@ -23,8 +23,8 @@ GOPATH="$workspace"
 export GOPATH
 
 # Run the command inside the workspace.
-cd "$ethdir/go-wabei"
-PWD="$ethdir/go-wabei"
+cd "$ethdir/go-hap"
+PWD="$ethdir/go-hap"
 
 # Launch the arguments with the configured environment.
 exec "$@"

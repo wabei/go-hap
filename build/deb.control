@@ -5,8 +5,8 @@ Maintainer: {{.Author}}
 Build-Depends: debhelper (>= 8.0.0), golang-1.10
 Standards-Version: 3.9.5
 Homepage: https://wabei.org
-Vcs-Git: git://github.com/wabei/go-wabei.git
-Vcs-Browser: https://github.com/wabei/go-wabei
+Vcs-Git: git://github.com/wabei/go-hap.git
+Vcs-Browser: https://github.com/wabei/go-hap
 
 Package: {{.Name}}
 Architecture: any

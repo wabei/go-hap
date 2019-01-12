@@ -9,9 +9,9 @@
   <version>{{.Version}}</version>
   <packaging>aar</packaging>
 
-  <name>Android Wabei Client</name>
-  <description>Android port of the go-wabei libraries and node</description>
-  <url>https://github.com/wabei/go-wabei</url>
+  <name>Android Hap Client</name>
+  <description>Android port of the go-hap libraries and node</description>
+  <url>https://github.com/wabei/go-hap</url>
   <inceptionYear>2015</inceptionYear>
 
   <licenses>
@@ -23,7 +23,7 @@
   </licenses>
 
   <organization>
-    <name>Wabei</name>
+    <name>Hap</name>
     <url>https://wabei.org</url>
   </organization>
 
@@ -48,10 +48,10 @@
 
   <issueManagement>
     <system>GitHub Issues</system>
-    <url>https://github.com/wabei/go-wabei/issues/</url>
+    <url>https://github.com/wabei/go-hap/issues/</url>
   </issueManagement>
 
   <scm>
-    <url>https://github.com/wabei/go-wabei</url>
+    <url>https://github.com/wabei/go-hap</url>
   </scm>
 </project>

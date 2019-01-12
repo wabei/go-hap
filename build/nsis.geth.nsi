@@ -29,9 +29,9 @@
 # - sign installer
 CRCCheck on
 
-!define GROUPNAME "Wabei"
+!define GROUPNAME "Hap"
 !define APPNAME "Geth"
-!define DESCRIPTION "Official Go implementation of the Wabei protocol"
+!define DESCRIPTION "Official Go implementation of the Hap protocol"
 !addplugindir .\
 
 # Require admin rights on NT6+ (When UAC is turned on)

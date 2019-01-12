@@ -2,12 +2,12 @@ Pod::Spec.new do |spec|
   spec.name         = 'Geth'
   spec.version      = '{{.Version}}'
   spec.license      = { :type => 'GNU Lesser General Public License, Version 3.0' }
-  spec.homepage     = 'https://github.com/wabei/go-wabei'
+  spec.homepage     = 'https://github.com/wabei/go-hap'
   spec.authors      = { {{range .Contributors}}
 		'{{.Name}}' => '{{.Email}}',{{end}}
 	}
-  spec.summary      = 'iOS Wabei Client'
-  spec.source       = { :git => 'https://github.com/wabei/go-wabei.git', :commit => '{{.Commit}}' }
+  spec.summary      = 'iOS Hap Client'
+  spec.source       = { :git => 'https://github.com/wabei/go-hap.git', :commit => '{{.Commit}}' }
 
 	spec.platform = :ios
   spec.ios.deployment_target  = '9.0'

@@ -1,18 +1,18 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2016 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 // +build none
 
@@ -58,7 +58,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wabei/go-wabei/internal/build"
+	"github.com/wabei/go-hap/internal/build"
 )
 
 var (
@@ -85,23 +85,23 @@ var (
 	debExecutables = []debExecutable{
 		{
 			Name:        "abigen",
-			Description: "Source code generator to convert Wabei contract definitions into easy to use, compile-time type-safe Go packages.",
+			Description: "Source code generator to convert Hap contract definitions into easy to use, compile-time type-safe Go packages.",
 		},
 		{
 			Name:        "bootnode",
-			Description: "Wabei bootnode.",
+			Description: "Hap bootnode.",
 		},
 		{
 			Name:        "evm",
-			Description: "Developer utility version of the EVM (Wabei Virtual Machine) that is capable of running bytecode snippets within a configurable environment and execution mode.",
+			Description: "Developer utility version of the EVM (Hap Virtual Machine) that is capable of running bytecode snippets within a configurable environment and execution mode.",
 		},
 		{
 			Name:        "geth",
-			Description: "Wabei CLI client.",
+			Description: "Hap CLI client.",
 		},
 		{
 			Name:        "puppeth",
-			Description: "Wabei private network manager.",
+			Description: "Hap private network manager.",
 		},
 		{
 			Name:        "rlpdump",
@@ -109,11 +109,11 @@ var (
 		},
 		{
 			Name:        "swarm",
-			Description: "Wabei Swarm daemon and tools",
+			Description: "Hap Swarm daemon and tools",
 		},
 		{
 			Name:        "wnode",
-			Description: "Wabei Whisper diagnostic tool",
+			Description: "Hap Whisper diagnostic tool",
 		},
 	}
 
@@ -188,7 +188,7 @@ func doInstall(cmdline []string) {
 
 		if minor < 9 {
 			log.Println("You have Go version", runtime.Version())
-			log.Println("go-wabei requires at least Go version 1.9 and cannot")
+			log.Println("go-hap requires at least Go version 1.9 and cannot")
 			log.Println("be compiled with an earlier version. Please upgrade your Go installation.")
 			os.Exit(1)
 		}
@@ -526,7 +526,7 @@ func isUnstableBuild(env build.Environment) bool {
 type debMetadata struct {
 	Env build.Environment
 
-	// go-wabei version being built. Note that this
+	// go-hap version being built. Note that this
 	// is not the debian package version. The package version
 	// is constructed by VersionString.
 	Version string
@@ -543,7 +543,7 @@ type debExecutable struct {
 func newDebMetadata(distro, author string, env build.Environment, t time.Time) debMetadata {
 	if author == "" {
 		// No signing key, use default author.
-		author = "Wabei Builds <fjl@wabei.org>"
+		author = "Hap Builds <fjl@wabei.org>"
 	}
 	return debMetadata{
 		Env:         env,
@@ -731,7 +731,7 @@ func doAndroidArchive(cmdline []string) {
 	// Build the Android archive and Maven resources
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
 	build.MustRun(gomobileTool("init", "--ndk", os.Getenv("ANDROID_NDK")))
-	build.MustRun(gomobileTool("bind", "--target", "android", "--javapkg", "org.wabei", "-v", "github.com/wabei/go-wabei/mobile"))
+	build.MustRun(gomobileTool("bind", "--target", "android", "--javapkg", "org.wabei", "-v", "github.com/wabei/go-hap/mobile"))
 
 	if *local {
 		// If we're building locally, copy bundle to build dir and skip Maven
@@ -852,7 +852,7 @@ func doXCodeFramework(cmdline []string) {
 	// Build the iOS XCode framework
 	build.MustRun(goTool("get", "golang.org/x/mobile/cmd/gomobile", "golang.org/x/mobile/cmd/gobind"))
 	build.MustRun(gomobileTool("init"))
-	bind := gomobileTool("bind", "--target", "ios", "--tags", "ios", "-v", "github.com/wabei/go-wabei/mobile")
+	bind := gomobileTool("bind", "--target", "ios", "--tags", "ios", "-v", "github.com/wabei/go-hap/mobile")
 
 	if *local {
 		// If we're building locally, use the build folder and stop afterwards
