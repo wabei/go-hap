@@ -1,18 +1,18 @@
-// Copyright 2015 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2015 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package console
 
@@ -26,12 +26,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/consensus/wabash"
-	"github.com/wabei/go-wabei/core"
-	"github.com/wabei/go-wabei/eth"
-	"github.com/wabei/go-wabei/internal/jsre"
-	"github.com/wabei/go-wabei/node"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/consensus/wabash"
+	"github.com/wabei/go-hap/core"
+	"github.com/wabei/go-hap/eth"
+	"github.com/wabei/go-hap/internal/jsre"
+	"github.com/wabei/go-hap/node"
 )
 
 const (
@@ -75,7 +75,7 @@ func (p *hookedPrompter) SetWordCompleter(completer WordCompleter) {}
 type tester struct {
 	workspace string
 	stack     *node.Node
-	wabei  *eth.Wabei
+	wabei  *eth.Hap
 	console   *Console
 	input     *hookedPrompter
 	output    *bytes.Buffer
@@ -90,7 +90,7 @@ func newTester(t *testing.T, confOverride func(*eth.Config)) *tester {
 		t.Fatalf("failed to create temporary keystore: %v", err)
 	}
 
-	// Create a networkless protocol stack and start an Wabei service within
+	// Create a networkless protocol stack and start an Hap service within
 	stack, err := node.New(&node.Config{DataDir: workspace, UseLightweightKDF: true, Name: testInstance})
 	if err != nil {
 		t.Fatalf("failed to create node: %v", err)
@@ -106,7 +106,7 @@ func newTester(t *testing.T, confOverride func(*eth.Config)) *tester {
 		confOverride(ethConf)
 	}
 	if err = stack.Register(func(ctx *node.ServiceContext) (node.Service, error) { return eth.New(ctx, ethConf) }); err != nil {
-		t.Fatalf("failed to register Wabei protocol: %v", err)
+		t.Fatalf("failed to register Hap protocol: %v", err)
 	}
 	// Start the node and assemble the JavaScript console around it
 	if err = stack.Start(); err != nil {
@@ -131,7 +131,7 @@ func newTester(t *testing.T, confOverride func(*eth.Config)) *tester {
 		t.Fatalf("failed to create JavaScript console: %v", err)
 	}
 	// Create the final tester and return
-	var wabei *eth.Wabei
+	var wabei *eth.Hap
 	stack.Service(&wabei)
 
 	return &tester{
