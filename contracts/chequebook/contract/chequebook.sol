@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import "./mortal.sol";
 
-/// @title Chequebook for Wabei micropayments
+/// @title Chequebook for Hap micropayments
 /// @author Daniel A. Nagy <daniel@wabei.org>
 contract chequebook is mortal {
     // Cumulative paid amount in wei to each beneficiary

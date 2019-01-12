@@ -1,18 +1,18 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2016 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package ens
 
@@ -23,15 +23,15 @@ package ens
 import (
 	"strings"
 
-	"github.com/wabei/go-wabei/accounts/abi/bind"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/contracts/ens/contract"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
+	"github.com/wabei/go-hap/accounts/abi/bind"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/contracts/ens/contract"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
 )
 
 var (
-	MainNetAddress = common.HexToAddress("0x2bcec565226ba2d422ea05ae2ab899ca59c1e73d")
+	MainNetAddress = common.HexToAddress("0xe2d8b3dc690051dff6f3d390026a96530163bec8")
 	TestNetAddress = common.HexToAddress("0x112234455c3a32fd11230c42e7bccd4a84e02010")
 )
 
@@ -42,7 +42,7 @@ type ENS struct {
 }
 
 // NewENS creates a struct exposing convenient high-level operations for interacting with
-// the Wabei Name Service.
+// the Hap Name Service.
 func NewENS(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*ENS, error) {
 	ens, err := contract.NewENS(contractAddr, contractBackend)
 	if err != nil {

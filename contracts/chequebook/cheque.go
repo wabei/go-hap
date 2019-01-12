@@ -1,20 +1,20 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2016 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package chequebook package wraps the 'chequebook' Wabei smart contract.
+// Package chequebook package wraps the 'chequebook' Hap smart contract.
 //
 // The functions in this package allow using chequebook for
 // issuing, receiving, verifying cheques in wabei; (auto)cashing cheques in wabei
@@ -36,14 +36,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wabei/go-wabei/accounts/abi/bind"
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/common/hexutil"
-	"github.com/wabei/go-wabei/contracts/chequebook/contract"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/swarm/services/swap/swap"
+	"github.com/wabei/go-hap/accounts/abi/bind"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/common/hexutil"
+	"github.com/wabei/go-hap/contracts/chequebook/contract"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/swarm/services/swap/swap"
 )
 
 // TODO(zelig): watch peer solvency and notify of bouncing cheques
@@ -620,7 +620,7 @@ func sig2vrs(sig []byte) (v byte, r, s [32]byte) {
 	return
 }
 
-// Cash cashes the cheque by sending an Wabei transaction.
+// Cash cashes the cheque by sending an Hap transaction.
 func (self *Cheque) Cash(session *contract.ChequebookSession) (string, error) {
 	v, r, s := sig2vrs(self.Sig)
 	tx, err := session.Cash(self.Beneficiary, self.Amount, v, r, s)
