@@ -1,25 +1,25 @@
-// Copyright 2016 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2016 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
 package state
 
 import (
 	"math/big"
 
-	"github.com/wabei/go-wabei/common"
+	"github.com/wabei/go-hap/common"
 )
 
 // journalEntry is a modification entry in the state change journal that can be
@@ -28,7 +28,7 @@ type journalEntry interface {
 	// revert undoes the changes introduced by this journal entry.
 	revert(*StateDB)
 
-	// dirtied returns the Wabei address modified by this journal entry.
+	// dirtied returns the Hap address modified by this journal entry.
 	dirtied() *common.Address
 }
 

@@ -1,20 +1,20 @@
-// Copyright 2014 The go-wabei Authors
-// This file is part of the go-wabei library.
+// Copyright 2014 The go-hap Authors
+// This file is part of the go-hap library.
 //
-// The go-wabei library is free software: you can redistribute it and/or modify
+// The go-hap library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-wabei library is distributed in the hope that it will be useful,
+// The go-hap library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-wabei library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-hap library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package state provides a caching layer atop the Wabei state trie.
+// Package state provides a caching layer atop the Hap state trie.
 package state
 
 import (
@@ -23,12 +23,12 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/wabei/go-wabei/common"
-	"github.com/wabei/go-wabei/core/types"
-	"github.com/wabei/go-wabei/crypto"
-	"github.com/wabei/go-wabei/log"
-	"github.com/wabei/go-wabei/rlp"
-	"github.com/wabei/go-wabei/trie"
+	"github.com/wabei/go-hap/common"
+	"github.com/wabei/go-hap/core/types"
+	"github.com/wabei/go-hap/crypto"
+	"github.com/wabei/go-hap/log"
+	"github.com/wabei/go-hap/rlp"
+	"github.com/wabei/go-hap/trie"
 )
 
 type revision struct {
@@ -422,7 +422,7 @@ func (self *StateDB) createObject(addr common.Address) (newobj, prev *stateObjec
 //   1. sends funds to sha(account ++ (nonce + 1))
 //   2. tx_create(sha(account ++ nonce)) (note that this gets the address of 1)
 //
-// Carrying over the balance ensures that Wabei doesn't disappear.
+// Carrying over the balance ensures that Hap doesn't disappear.
 func (self *StateDB) CreateAccount(addr common.Address) {
 	new, prev := self.createObject(addr)
 	if prev != nil {
@@ -471,7 +471,7 @@ func (self *StateDB) Copy() *StateDB {
 	}
 	// Copy the dirty states, logs, and preimages
 	for addr := range self.journal.dirties {
-		// As documented [here](https://github.com/wabei/go-wabei/pull/16485#issuecomment-380438527),
+		// As documented [here](https://github.com/wabei/go-hap/pull/16485#issuecomment-380438527),
 		// and in the Finalise-method, there is a case where an object is in the journal but not
 		// in the stateObjects: OOG after touch on ripeMD prior to Byzantium. Thus, we need to check for
 		// nil
